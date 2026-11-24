@@ -13,8 +13,8 @@ const api =axios.create({
     }
 })
 
-export const getTrendings = async() => {
-    const response = await api.get("/trending/all/week")
+export const getTrendings = async(page=1) => {
+    const response = await api.get("/trending/all/week",{params:{page}})
     return response.data.results
 }
 
@@ -29,6 +29,10 @@ export const getGenres = async()=> {
     return [...new Map(all.map((g) => [g.id, g])).values()]
 }
 
+export const getCategories = async(type) => {
+    const response = await api.get(`/genre/${type}/list`)
+    return response.data.genres
+}
 
 export const getMovies=async ()=> {
     const response = await api.get("discover/movie")
@@ -57,8 +61,22 @@ export const getTitle = (type) => {
     return selected.title
 }
 
-export const getMedia = async (type, searchText) => {
-    console.log(type, searchText)
-    const response = await api.get(`/search/${type}?query=${searchText}`)
+export const getMedia = async (type, searchText, page) => {
+    const response = await api.get(`/search/${type}`,{params:{query: searchText, page}})
+    return response.data
+}
+
+export const getSelectedMediaCateg = async (type, selectedctgs, page=1) => {
+    const response = await api.get(`/discover/${type}?with_genres=${selectedctgs}`,{params:{page}})
     return response.data.results
+}
+
+export const getTrailer= async (type, id) => {
+    const response = await api.get(`/${type}/${id}/videos`)
+    return response.data.results
+}
+
+export const getCredits= async (type, id) => {
+    const response = await api.get(`/${type}/${id}/credits`)
+    return response.data.cast
 }

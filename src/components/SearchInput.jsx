@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const SearchInput = ({search, setSearch}) => {
-    console.log(search)
     return (
         <div>
             <label className="input bg-gray-400 text-white">

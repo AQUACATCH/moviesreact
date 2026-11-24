@@ -9,7 +9,6 @@ import { Pagination } from '../components/Pagination'
 export const Home = () => {
   const [page, setPage] = useState(1)
   const [tendings, setTendings] = useState(null)
-  tendings && console.log(tendings)
 
   useEffect(() => {
     getTrendings(page).then(setTendings)

@@ -7,7 +7,6 @@ export const Categories = ({categories, selectedCategs, setSelectedCategs, setPa
     }
 
     useEffect(() => {
-        console.log(selectedCategs)
     }, [selectedCategs])
 
     return (
